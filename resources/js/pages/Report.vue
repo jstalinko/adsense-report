@@ -160,8 +160,8 @@ const openEditDialog = (laporan: Laporan) => {
     editForm.tax = laporan.tax;
     // Format the created_at date to "YYYY-MM-DD" for the form
     editForm.tanggal = formatDateFns(new Date(laporan.created_at), 'yyyy-MM-dd');
-    editModalHint.value = formatRupiah(laporan.modal);
-    editRevenueHint.value = formatRupiah(laporan.revenue);
+    editModalHint.value = formatCurrency(laporan.modal , editForm.currency);
+    editRevenueHint.value = formatCurrency(laporan.revenue , editForm.currency);
 
     isEditDialogOpen.value = true;
 };
@@ -426,13 +426,13 @@ const editRevenueHint = ref<string>('Rp. 0');
                                     <div class="grid grid-cols-4 items-center gap-4">
                                         <label for="modal" class="text-right">Modal</label>
                                         <Input id="modal" v-model="form.modal" type="number" class="col-span-2" required
-                                            @keyup="formModalHint = formatRupiah(form.modal)" />
+                                            @keyup="formModalHint = formatCurrency(form.modal , form.currency)" />
                                         <span class="text-foreground-muted">{{ formModalHint }}</span>
                                     </div>
                                     <div class="grid grid-cols-4 items-center gap-4">
                                         <label for="revenue" class="text-right">Revenue</label>
                                         <Input id="revenue" v-model="form.revenue" type="number" class="col-span-2"
-                                            required @keyup="formRevenueHint = formatRupiah(form.revenue)" />
+                                            required @keyup="formRevenueHint = formatCurrency(form.revenue,form.currency)" />
                                         <span class="text-foreground-muted">{{ formRevenueHint }}</span>
 
                                     </div>

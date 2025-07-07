@@ -17,3 +17,15 @@ export const isAdmin = (): boolean => {
 
     return !!user?.is_admin;
 };
+
+export const formatCurrency = (value: number, currency: string) => {
+    const options: Intl.NumberFormatOptions = {
+        style: 'currency',
+        currency,
+    };
+    if (currency === 'USD') {
+        options.minimumFractionDigits = 2;
+        options.maximumFractionDigits = 2;
+    }
+    return new Intl.NumberFormat('id-ID', options).format(value);
+};

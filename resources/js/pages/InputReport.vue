@@ -14,7 +14,7 @@ import { Calendar } from '@/components/ui/calendar';
 // Date & Formatting Libraries
 import { DateFormatter, today, parseDate, getLocalTimeZone, type CalendarDate } from '@internationalized/date';
 import { toDate } from 'reka-ui/date';
-import { cn ,formatRupiah} from '@/lib/utils';
+import { cn ,formatCurrency} from '@/lib/utils';
 import { Calendar as CalendarIcon } from 'lucide-vue-next';
 
 
@@ -143,13 +143,13 @@ const formRevenueHint = ref<string>('Rp. ');
 
                             <div class="grid grid-cols-4 items-center gap-4">
                                 <label for="modal" class="text-right">Modal</label>
-                                <Input id="modal" v-model="form.modal" type="number" class="col-span-2" @keyup="formModalHint = formatRupiah(form.modal)" required />
+                                <Input id="modal" v-model="form.modal" type="number" class="col-span-2" @keyup="formModalHint = formatCurrency(form.modal , form.currency)" required />
                                 <span class="text-foreground-muted text-sm">{{ formModalHint }}</span>
                             </div>
 
                             <div class="grid grid-cols-4 items-center gap-4">
                                 <label for="revenue" class="text-right">Revenue</label>
-                                <Input id="revenue" v-model="form.revenue" type="number" class="col-span-2" @keyup="formRevenueHint = formatRupiah(form.revenue)" required />
+                                <Input id="revenue" v-model="form.revenue" type="number" class="col-span-2" @keyup="formRevenueHint = formatCurrency(form.revenue,form.currency)" required />
                                 <span class="text-foreground-muted">{{ formRevenueHint }}</span>
 
                             </div>
