@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ExchangeRateController;
-use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ExchangeRateController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -25,6 +26,11 @@ Route::group(['middleware' => 'auth'] , function(){
     Route::get('/rates/{id}/edit',[ExchangeRateController::class,'edit'])->name('rates.edit');
     Route::post('/rates/{id}/edit',[ExchangeRateController::class,'update'])->name('rates.update');
     Route::get('/rates/{id}/delete',[ExchangeRateController::class,'destroy'])->name('rates.destroy');
+
+    Route::get('/users' , [UserController::class,'index'])->name('user.index');
+    Route::get('/users/{id}/delete',[UserController::class,'destroy'])->name('user.delete');
+    Route::post('/users/{id}/update', [UserController::class , 'update'])->name('user.update');
+    Route::post('/users/add' , [UserController::class,'store'])->name('user.store');
 
 
 

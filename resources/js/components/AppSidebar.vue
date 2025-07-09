@@ -4,10 +4,10 @@ import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, CircleDollarSignIcon, Folder, LayoutGrid, ListCheckIcon, PlusCircleIcon } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import { BookOpen, CircleDollarSignIcon, Folder, LayoutGrid, ListCheckIcon, PlusCircleIcon, User2Icon } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
-
+import { isAdmin } from '@/lib/utils';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
@@ -31,7 +31,13 @@ const mainNavItems: NavItem[] = [
     }
 ];
 
-const footerNavItems: NavItem[] = [];
+const footerNavItems: NavItem[] = [
+    {
+        title:'Manage User',
+        href:'/users',
+        icon:User2Icon
+    }
+];
 </script>
 
 <template>
@@ -52,8 +58,8 @@ const footerNavItems: NavItem[] = [];
             <NavMain :items="mainNavItems" />
         </SidebarContent>
 
-        <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
+        <SidebarFooter >
+            <NavFooter v-if="isAdmin()" :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>
